@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "ngx-progressbar-core.js",
+  "sources": [
+    "ng://@ngx-progressbar/core/projects/core/src/ngx-progressbar-core.ts"
+  ],
+  "sourcesContent": [
+    "/**\n * Generated bundle index. Do not edit.\n */\n\nexport * from './public_api';\n\nexport {CONFIG as ɵa} from './lib/ng-progress.token';"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;AAIA,oGAAc,cAAc,CAAC;AAE7B,OAAO,EAAC,MAAM,IAAI,EAAE,EAAC,MAAM,yBAAyB,CAAC"
+}

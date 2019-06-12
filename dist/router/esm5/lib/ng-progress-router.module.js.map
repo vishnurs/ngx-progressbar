@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "ng-progress-router.module.js",
+  "sources": [
+    "ng://@ngx-progressbar/router/projects/router/src/lib/ng-progress-router.module.ts"
+  ],
+  "sourcesContent": [
+    "import { NgModule } from '@angular/core';\nimport { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';\nimport { NgProgress } from '@ngx-progressbar/core';\n\n@NgModule({})\nexport class NgProgressRouterModule {\n\n  constructor(progress: NgProgress, router: Router) {\n\n    router.events.subscribe(event => {\n      if (event instanceof NavigationStart) {\n        progress.start();\n      }\n\n      if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {\n        progress.complete();\n      }\n    });\n  }\n}\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,eAAe,CAAC;AACzC,OAAO,EAAE,gBAAgB,EAAE,aAAa,EAAE,eAAe,EAAE,eAAe,EAAE,MAAM,EAAE,MAAM,iBAAiB,CAAC;AAC5G,OAAO,EAAE,UAAU,EAAE,MAAM,uBAAuB,CAAC;AAGnD,MAAM;;;;;IAEJ,YAAY,QAAoB,EAAE,MAAc;QAE9C,MAAM,CAAC,MAAM,CAAC,SAAS,CAAC,KAAK,CAAC,EAAE;YAC9B,EAAE,CAAC,CAAC,KAAK,YAAY,eAAe,CAAC,CAAC,CAAC;gBACrC,QAAQ,CAAC,KAAK,EAAE,CAAC;aAClB;YAED,EAAE,CAAC,CAAC,KAAK,YAAY,aAAa,IAAI,KAAK,YAAY,gBAAgB,IAAI,KAAK,YAAY,eAAe,CAAC,CAAC,CAAC;gBAC5G,QAAQ,CAAC,QAAQ,EAAE,CAAC;aACrB;SACF,CAAC,CAAC;KACJ;;;YAdF,QAAQ,SAAC,EAAE;;;;YAFH,UAAU;YADyD,MAAM"
+}

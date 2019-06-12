@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "public_api.js",
+  "sources": [
+    "ng://@ngx-progressbar/core/projects/core/src/public_api.ts"
+  ],
+  "sourcesContent": [
+    "export * from './lib/ng-progress.module';\nexport * from './lib/ng-progress.component';\nexport * from './lib/ng-progress-ref';\nexport * from './lib/ng-progress.service';\nexport * from './lib/ng-progress.interface';\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,oDAAc,0BAA0B,CAAC;AACzC,oCAAc,6BAA6B,CAAC;AAC5C,8BAAc,uBAAuB,CAAC;AACtC,2BAAc,2BAA2B,CAAC"
+}

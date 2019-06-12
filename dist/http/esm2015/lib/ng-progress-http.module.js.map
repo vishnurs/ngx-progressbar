@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "ng-progress-http.module.js",
+  "sources": [
+    "ng://@ngx-progressbar/http/projects/http/src/lib/ng-progress-http.module.ts"
+  ],
+  "sourcesContent": [
+    "import { NgModule, ModuleWithProviders } from '@angular/core';\nimport { HTTP_INTERCEPTORS } from '@angular/common/http';\nimport { NgProgressInterceptor } from './ng-progress.interceptor';\nimport { NgProgressHttpConfig } from './ng-progress-http.interface';\nimport { CONFIG } from './ng-progress-http.token';\n\nconst defaultConfig: NgProgressHttpConfig = {\n  silentApis: []\n}\n\n@NgModule({\n})\nexport class NgProgressHttpModule {\n  static forRoot(config?: NgProgressHttpConfig): ModuleWithProviders {\n    config = {...defaultConfig, ...config};\n    return {\n      ngModule: NgProgressHttpModule,\n      providers: [\n        { provide: CONFIG, useValue: config },\n        { provide: HTTP_INTERCEPTORS, useClass: NgProgressInterceptor, multi: true }\n      ]\n    };\n  }\n}\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,OAAO,EAAE,QAAQ,EAAuB,MAAM,eAAe,CAAC;AAC9D,OAAO,EAAE,iBAAiB,EAAE,MAAM,sBAAsB,CAAC;AACzD,OAAO,EAAE,qBAAqB,EAAE,MAAM,2BAA2B,CAAC;AAElE,OAAO,EAAE,MAAM,EAAE,MAAM,0BAA0B,CAAC;AAElD,uBAAM,aAAa,GAAyB;IAC1C,UAAU,EAAE,EAAE;CACf,CAAA;AAID,MAAM;;;;;IACJ,MAAM,CAAC,OAAO,CAAC,MAA6B;QAC1C,MAAM,qBAAO,aAAa,EAAK,MAAM,CAAC,CAAC;QACvC,MAAM,CAAC;YACL,QAAQ,EAAE,oBAAoB;YAC9B,SAAS,EAAE;gBACT,EAAE,OAAO,EAAE,MAAM,EAAE,QAAQ,EAAE,MAAM,EAAE;gBACrC,EAAE,OAAO,EAAE,iBAAiB,EAAE,QAAQ,EAAE,qBAAqB,EAAE,KAAK,EAAE,IAAI,EAAE;aAC7E;SACF,CAAC;KACH;;;YAZF,QAAQ,SAAC,EACT"
+}

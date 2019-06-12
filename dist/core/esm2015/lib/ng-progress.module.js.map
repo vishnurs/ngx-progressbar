@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "ng-progress.module.js",
+  "sources": [
+    "ng://@ngx-progressbar/core/projects/core/src/lib/ng-progress.module.ts"
+  ],
+  "sourcesContent": [
+    "import { ModuleWithProviders, NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NgProgressComponent } from './ng-progress.component';\nimport { NgProgress } from './ng-progress.service';\nimport { NgProgressConfig } from './ng-progress.interface';\nimport { CONFIG } from './ng-progress.token';\n\nexport function NgProgressFactory(config: NgProgressConfig) {\n  return new NgProgress(config);\n}\n\n@NgModule({\n  declarations: [NgProgressComponent],\n  exports: [NgProgressComponent],\n  imports: [CommonModule]\n})\nexport class NgProgressModule {\n  static forRoot(config?: NgProgressConfig): ModuleWithProviders {\n    return {\n      ngModule: NgProgressModule,\n      providers: [\n        {provide: CONFIG, useValue: config},\n        {\n          provide: NgProgress,\n          useFactory: NgProgressFactory,\n          deps: [CONFIG]\n        }\n      ]\n    };\n  }\n}\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,OAAO,EAAuB,QAAQ,EAAE,MAAM,eAAe,CAAC;AAC9D,OAAO,EAAE,YAAY,EAAE,MAAM,iBAAiB,CAAC;AAC/C,OAAO,EAAE,mBAAmB,EAAE,MAAM,yBAAyB,CAAC;AAC9D,OAAO,EAAE,UAAU,EAAE,MAAM,uBAAuB,CAAC;AAEnD,OAAO,EAAE,MAAM,EAAE,MAAM,qBAAqB,CAAC;;;;;AAE7C,MAAM,4BAA4B,MAAwB;IACxD,MAAM,CAAC,IAAI,UAAU,CAAC,MAAM,CAAC,CAAC;CAC/B;AAOD,MAAM;;;;;IACJ,MAAM,CAAC,OAAO,CAAC,MAAyB;QACtC,MAAM,CAAC;YACL,QAAQ,EAAE,gBAAgB;YAC1B,SAAS,EAAE;gBACT,EAAC,OAAO,EAAE,MAAM,EAAE,QAAQ,EAAE,MAAM,EAAC;gBACnC;oBACE,OAAO,EAAE,UAAU;oBACnB,UAAU,EAAE,iBAAiB;oBAC7B,IAAI,EAAE,CAAC,MAAM,CAAC;iBACf;aACF;SACF,CAAC;KACH;;;YAlBF,QAAQ,SAAC;gBACR,YAAY,EAAE,CAAC,mBAAmB,CAAC;gBACnC,OAAO,EAAE,CAAC,mBAAmB,CAAC;gBAC9B,OAAO,EAAE,CAAC,YAAY,CAAC;aACxB"
+}

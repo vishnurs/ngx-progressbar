@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "ng-progress.token.js",
+  "sources": [
+    "ng://@ngx-progressbar/core/projects/core/src/lib/ng-progress.token.ts"
+  ],
+  "sourcesContent": [
+    "import { InjectionToken } from '@angular/core';\nimport { NgProgressConfig } from './ng-progress.interface';\n\nexport const CONFIG = new InjectionToken<NgProgressConfig>('config');\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,eAAe,CAAC;AAG/C,MAAM,CAAC,uBAAM,MAAM,GAAG,IAAI,cAAc,CAAmB,QAAQ,CAAC,CAAC"
+}

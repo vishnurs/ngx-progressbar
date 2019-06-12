@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "public_api.js",
+  "sources": [
+    "ng://@ngx-progressbar/router/projects/router/src/public_api.ts"
+  ],
+  "sourcesContent": [
+    "export * from './lib/ng-progress-router.module';\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,uCAAc,iCAAiC,CAAC"
+}
