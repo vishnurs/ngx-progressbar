@@ -1,0 +1,25 @@
+{
+  "version": 3,
+  "file": "ngx-progressbar-http.umd.js",
+  "sources": [
+    "ng://@ngx-progressbar/http/out/ng-progress-http.module.ts",
+    "ng://@ngx-progressbar/http/out/ng-progress.interceptor.ts",
+    "ng://@ngx-progressbar/http/out/ng-progress-http.token.ts"
+  ],
+  "sourcesContent": [
+    "import { NgModule } from '@angular/core';\nimport { HTTP_INTERCEPTORS } from '@angular/common/http';\nimport { NgProgressInterceptor } from './ng-progress.interceptor';\n\n@NgModule({\n  providers: [\n    { provide: HTTP_INTERCEPTORS, useClass: NgProgressInterceptor, multi: true }\n  ],\n})\nexport class NgProgressHttpModule {}\n",
+    "import { Injectable, Optional, Inject } from '@angular/core';\nimport { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';\nimport { Observable } from 'rxjs/Observable';\nimport { finalize } from 'rxjs/operators/finalize';\nimport { NgProgressHttpConfig } from './ng-progress-http.interface';\nimport { CONFIG } from './ng-progress-http.token';\nimport { NgProgress } from '@ngx-progressbar/core';\n\n@Injectable()\nexport class NgProgressInterceptor implements HttpInterceptor {\n\n  private _inProgressCount = 0;\n\n  constructor(\n    private _ngProgress: NgProgress,\n    @Optional() @Inject(CONFIG) private _config?: NgProgressHttpConfig\n  ) {\n  }\n\n  // Ignoring specific requests will be supported after this https://github.com/angular/angular/issues/18155\n  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {\n    // Ignore silent api requests\n    if (this.checkUrl(req)) {\n      return next.handle(req);\n    }\n    this._inProgressCount++;\n    if (!this._ngProgress.ref('root').isStarted) {\n      this._ngProgress.start();\n    }\n    return next.handle(req).pipe(finalize(() => {\n      this._inProgressCount--;\n      if (this._inProgressCount === 0) {\n        this._ngProgress.complete();\n      }\n    }));\n  }\n\n  private checkUrl(req: HttpRequest<any>) {\n    const url = req.url.toLowerCase();\n    const found = this._config.silentApis.find((u) => url.startsWith(u));\n    return !!found;\n  }\n}\n",
+    "import { InjectionToken } from '@angular/core';\nimport { NgProgressHttpConfig } from './ng-progress-http.interface';\n\nexport const CONFIG = new InjectionToken<NgProgressHttpConfig>('config');"
+  ],
+  "names": [
+    "HTTP_INTERCEPTORS",
+    "NgModule",
+    "Optional",
+    "Inject",
+    "NgProgress",
+    "Injectable",
+    "finalize",
+    "InjectionToken"
+  ],
+  "mappings": ";;;;;;AEAA,IAGa,MAAM,GAAG,IAAIO,mBAAc,CAAuB,QAAQ,CAAC,CAHxE;ADAA,IAAA,qBAAA,IAAA,YAAA;IAaE,SAAF,qBAAA,CACY,WADZ,EAEwC,OAFxC,EAAA;QACY,IAAZ,CAAA,WAAuB,GAAX,WAAW,CAAvB;QACwC,IAAxC,CAAA,OAA+C,GAAP,OAAO,CAA/C;QAJA,IAAA,CAAA,gBAAA,GAA6B,CAAC,CAA9B;KAMG;IAGD,qBAAF,CAAA,SAAA,CAAA,SAAW,GAAT,UAAU,GAAqB,EAAE,IAAiB,EAApD;QAAE,IAAF,KAAA,GAAA,IAAA,CAeG;QAbC,IAAI,IAAI,CAAC,QAAQ,CAAC,GAAG,CAAC,EAAE;YACtB,OAAO,IAAI,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC;SACzB;QACD,IAAI,CAAC,gBAAgB,EAAE,CAAC;QACxB,IAAI,CAAC,IAAI,CAAC,WAAW,CAAC,GAAG,CAAC,MAAM,CAAC,CAAC,SAAS,EAAE;YAC3C,IAAI,CAAC,WAAW,CAAC,KAAK,EAAE,CAAC;SAC1B;QACD,OAAO,IAAI,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,IAAI,CAACD,iBAAQ,CAAC,YAA1C;YACM,KAAI,CAAC,gBAAgB,EAAE,CAAC;YACxB,IAAI,KAAI,CAAC,gBAAgB,KAAK,CAAC,EAAE;gBAC/B,KAAI,CAAC,WAAW,CAAC,QAAQ,EAAE,CAAC;aAC7B;SACF,CAAC,CAAC,CAAC;KACL,CAAH;IAEU,qBAAV,CAAA,SAAA,CAAA,QAAkB,GAAR,UAAS,GAAqB,EAAxC;QACI,IAAM,GAAG,GAAG,GAAG,CAAC,GAAG,CAAC,WAAW,EAAE,CAAC;QAClC,IAAM,KAAK,GAAG,IAAI,CAAC,OAAO,CAAC,UAAU,CAAC,IAAI,CAAC,UAAC,CAAC,EAAjD,EAAsD,OAAA,GAAG,CAAC,UAAU,CAAC,CAAC,CAAC,CAAvE,EAAuE,CAAC,CAAC;QACrE,OAAO,CAAC,CAAC,KAAK,CAAC;;;;;IAhCnB,EAAA,IAAA,EAACD,eAAU,EAAX;;;IAFA,EAAA,IAAA,EAASD,iBAAU,GAAnB;IASA,EAAA,IAAA,EAAA,SAAA,EAAA,UAAA,EAAA,CAAA,EAAA,IAAA,EAAKF,aAAQ,EAAb,EAAA,EAAA,IAAA,EAAiBC,WAAM,EAAvB,IAAA,EAAA,CAAwB,MAAM,EAA9B,EAAA,EAAA,EAAA;;ADfA,IAAA,oBAAA,IAAA,YAAA;IAAA,SAAA,oBAAA,GAAA;;;;;IAIA,EAAA,IAAA,EAACF,aAAQ,EAAT,IAAA,EAAA,CAAU;gBACR,SAAS,EAAE;oBACT,EAAE,OAAO,EAAED,sBAAiB,EAAE,QAAQ,EAAE,qBAAqB,EAAE,KAAK,EAAE,IAAI,EAAE;iBAC7E;aACF,EAAD,EAAA;;;;;;;;;;;;;;;;"
+}
